@@ -23,6 +23,7 @@ I would reccomend that you make a new email to send from if you want to be extra
 # Requirements:
 - Tested on Windows. Theoretically it can work on any OS, in practice I'm not sure since there's integration with Chrome and path stuff for the time file.
 - Python 3+
+- Chrome browser installed
 - Chrome Web Driver https://chromedriver.chromium.org/downloads
 - A computer that is always on, so it can always check
 
