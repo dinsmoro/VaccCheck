@@ -2,9 +2,8 @@
 Emails or texts (through email-to-sms) when vaccine availabilities open up for your particular state (state &amp; supported stores must intersect for anything to be found though).
 
 # Supported Sites:
-Weis
-
-Wegmans
+- Weis
+- Wegmans
 
 # How it works:
 Code checks for vaccine availability for supported sites. For all current supported sites it checks using an automated Chrome browser since those sites have chatbots that I could only figure out how to navigate with a real browser.
