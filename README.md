@@ -3,6 +3,7 @@ Emails or texts (through email-to-sms) when vaccine availabilities open up for y
 
 # Supported Sites:
 Weis
+
 Wegmans
 
 # How it works:
