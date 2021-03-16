@@ -51,6 +51,7 @@ I would reccomend that you make a new email to send from if you want to be extra
 
 # How to use it:
   # For a specific site:
+- Download code via green code button on github website, click Download as zip. Unzip to where ever you want to run the code from.
 - Download and install Chrome
 - Download Chrome Web Driver, put it somewhere and add that folder to your path (in Windows search "edit the system environment variables", choose the suggestion for System Properties -> click on the Environment Variables button -> under User variables for {USER} click on Path to highlight it -> click on the Edit... button under that box -> Click on the New button -> Type the path of the folder with the Chrome Web Driver into that path. "OK" out of all of those windows.
 - Download Anaconda https://www.anaconda.com/products/individual it comes with most packages needed, set in path if you are the only user of the computer because it'll make calling pythonw.exe easier
@@ -61,6 +62,7 @@ I would reccomend that you make a new email to send from if you want to be extra
 - Done, so simple to check for vaccines!
 
   # For a change in a site:
+- Download code via green code button on github website, click Download as zip. Unzip to where ever you want to run the code from.
 - Download Anaconda https://www.anaconda.com/products/individual it comes with most packages needed, set in path if you are the only user of the computer because it'll make calling pythonw.exe easier
 - Open Anaconda Prompt (now in your start menu) and type "conda install selenium" to get selenium because it didn't come with the default packages
 - Open deltaWeb_xxx.py and enter the site you want to check for the changeHard variable, specify the resendLimit (60 min wait to start), enter the email you will send from, enter the password for the email you will send from (I'm not sure how secure the email stuff is but it's a built-in Python library so I hope it is pretty safe) - you will probably need to make a legacy password for it since it can't do 2 factor stuff or anything like that, enter the email/email-to-text destinations you want (I'm not sure if there is a limit). At the bottom, enter your email's smtp server address and port # (you can look it up for whatever email you have like 'aol email settings').
