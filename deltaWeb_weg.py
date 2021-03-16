@@ -169,7 +169,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
         
         msg.attach(MIMEText(message, 'plain')); #set message
         
-        server = smtplib.SMTP('smtp.aol.com', 587); #set the server
+        server = smtplib.SMTP('SMTPSERVERFOREMAIL.something', 000); #set the server, set the port number
         server.starttls(); #use STARTTLS
         server.login(email, password); #login
         text = msg.as_string(); #prep the email

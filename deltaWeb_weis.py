@@ -217,12 +217,12 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
         
         msg.attach(MIMEText(message, 'plain')); #set message
         
-        #server = smtplib.SMTP('smtp.aol.com', 587); #set the server
-        #server.starttls(); #use STARTTLS
-        #server.login(email, password); #login
-        #text = msg.as_string(); #prep the email
-        #server.sendmail(email, destinations, text); #send the email
-        #server.quit(); #kill the connection
+        server = smtplib.SMTP('SMTPSERVERFOREMAIL.something', 000); #set the server, set the port number
+        server.starttls(); #use STARTTLS
+        server.login(email, password); #login
+        text = msg.as_string(); #prep the email
+        server.sendmail(email, destinations, text); #send the email
+        server.quit(); #kill the connection
         print('SENT AM EMAIL')
         
         with open('timez.pkl', 'wb') as filez:
