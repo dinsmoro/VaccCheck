@@ -4,7 +4,7 @@ Emails or texts (through email-to-sms) when vaccine availabilities open up for y
 Also supports a generic site changing detection for simpler county sites and other things that don't need an automated webbrowser.
 
 # Supported Sites:
-- RiteAId - for state-wide search check https://www.vaxxmax.com/ (more hit-or-miss than this method, but covers entire state availability)
+- RiteAId - for state-wide search check https://www.vaxxmax.com/ (more hit-or-miss than this method - they don't have support for a bug with RiteAid where it goes to the avail screen but says there's no avail and won't let you click on anything without loading forever -, but covers entire state availability)
 - Giant (use multiple zipcodes to check specific Giants, seems very localized in their check) !have not found avail so can't test a true positive!
 - Weis
 - Wegmans
