@@ -222,7 +222,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
         WebDriverWait(driver, driverDelay).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Great news')]")));     
         button2click = driver.find_elements_by_xpath("//*[contains(text(), 'Great news')]"); #search for elements with this string
         if( len(button2click) > 0 ):
-			time.sleep(0.1); #give the page a chance to do stuff
+            time.sleep(0.1); #give the page a chance to do stuff
             button2click = driver.find_elements_by_xpath("//*[contains(text(), 'Continue')]")[-1]; #search for elements with this string
             time.sleep(0.1); #give the page a chance to do stuff
             button2click.click(); #click it
@@ -257,7 +257,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                     if( len(driver.find_elements_by_xpath("//*[contains(text(), 'check again another day')]")) <= 1 ): #Time of Day
                         riteaidWords.append(str(i+1)); #record the number that didn't tell you to check agian another day
                         riteaidSet['all reserved'] = False; #all reserved stays true, no appointments
-						driver.save_screenshot('riteaidAvail.png'); #save a pic to check later
+                        driver.save_screenshot('riteaidAvail.png'); #save a pic to check later
                         try:
                             driver.execute_script("window.onbeforeunload = function() {};")
                             driver.refresh(); #basically Next can move you forward but there's no avail (says so, using the calendar breaks it) so this gets out of it
@@ -292,8 +292,8 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                 # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
                 driver.save_screenshot('riteaidWebsiteBroken.png'); #save a pic to check later
         else:
-			pass;
-           # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
+            pass;
+            # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
        #END IF
     except:
         # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
