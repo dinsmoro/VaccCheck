@@ -222,6 +222,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
         WebDriverWait(driver, driverDelay).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Great news')]")));     
         button2click = driver.find_elements_by_xpath("//*[contains(text(), 'Great news')]"); #search for elements with this string
         if( len(button2click) > 0 ):
+			time.sleep(0.1); #give the page a chance to do stuff
             button2click = driver.find_elements_by_xpath("//*[contains(text(), 'Continue')]")[-1]; #search for elements with this string
             time.sleep(0.1); #give the page a chance to do stuff
             button2click.click(); #click it
@@ -234,7 +235,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                 try:
                     numStores = int(button2click_text[9:strstr(button2click_text,' stores').item()]);
                 except:
-                    numStores = 10; #assume 10 cause idk that Results: # stores thing doesn't always show apparently
+                    numStores = len(driver.find_elements_by_xpath("//*[contains(text(), 'SELECT THIS STORE')]"))-2; #calc off of the select this store return
                 #END TRY
                 
                 for i in range(0,numStores):
@@ -256,6 +257,19 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                     if( len(driver.find_elements_by_xpath("//*[contains(text(), 'check again another day')]")) <= 1 ): #Time of Day
                         riteaidWords.append(str(i+1)); #record the number that didn't tell you to check agian another day
                         riteaidSet['all reserved'] = False; #all reserved stays true, no appointments
+						driver.save_screenshot('riteaidAvail.png'); #save a pic to check later
+                        try:
+                            driver.execute_script("window.onbeforeunload = function() {};")
+                            driver.refresh(); #basically Next can move you forward but there's no avail (says so, using the calendar breaks it) so this gets out of it
+                            driver.switch_to.alert.accept(); #i hope this works, the error on the website stopped happening
+                            # driver.switch_to.alert.accept(); #i hope this works, the error on the website stopped happening
+                        except:
+                            alert = driver.switch_to.alert;
+                            alert.accept();
+                            button2click = driver.find_elements_by_xpath("//*[contains(text(), 'Reload')]")
+                            button2click.click(); #click it
+                        #END TRY
+                        WebDriverWait(driver, driverDelay).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Immunization Scheduler')]")));
                     else:
                         #catch a weird error
                         if( len(driver.find_elements_by_xpath("//*[contains(text(), 'Make an Appointment at Rite Aid')]")) > 0 ):
@@ -263,7 +277,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                                 driver.execute_script("window.onbeforeunload = function() {};")
                                 driver.refresh(); #basically Next can move you forward but there's no avail (says so, using the calendar breaks it) so this gets out of it
                                 driver.switch_to.alert.accept(); #i hope this works, the error on the website stopped happening
-                                driver.switch_to.alert.accept(); #i hope this works, the error on the website stopped happening
+                                # driver.switch_to.alert.accept(); #i hope this works, the error on the website stopped happening
                             except:
                                 alert = driver.switch_to.alert;
                                 alert.accept();
@@ -275,16 +289,17 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                     #END IF
                 #END FOR i
             except TimeoutException:
-                riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
+                # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
                 driver.save_screenshot('riteaidWebsiteBroken.png'); #save a pic to check later
         else:
-           riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
+			pass;
+           # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
        #END IF
     except:
-        riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
+        # riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
         driver.save_screenshot('riteaidNotSeenBefore.png'); #save a pic to check later
     #END TRY
-    driver.save_screenshot('riteaidTest.png'); #save a pic to check later
+    # driver.save_screenshot('riteaidTest.png'); #save a pic to check later
     # try:
     #     myElem = WebDriverWait(driver, driverDelay).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'are reserved at this time')]")));
     #     riteaidSet['all reserved'] = True; #all reserved stays true, no appointments
@@ -298,7 +313,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
     if( (riteaidSet['all reserved'] == False) ):
         #time to send email if either pass this
         subject = 'Riteaid Site Active'; #subject line
-        message = 'Body: Riteaid at zipcode '+zipper+' has availability at store numbers '+' & '.join(riteaidWords)+' Site: '+riteaidCheck; #message body
+        message = 'Body: Riteaid at zipcode '+zipper+' has availability at store numbers '+' & '.join(riteaidWords)+'. Site: '+riteaidCheck; #message body
         
         msg = MIMEMultipart(); #start an email message
         msg['From'] = email; #set from
