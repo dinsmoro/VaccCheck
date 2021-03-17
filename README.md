@@ -4,7 +4,7 @@ Emails or texts (through email-to-sms) when vaccine availabilities open up for y
 Also supports a generic site changing detection for simpler county sites and other things that don't need an automated webbrowser.
 
 # Supported Sites:
-- RiteAId
+- RiteAId - for state-wide search check https://www.vaxxmax.com/ (more hit-or-miss than this method)
 - Weis
 - Wegmans
 - Any site changing (using _change.py)
