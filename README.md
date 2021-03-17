@@ -5,6 +5,7 @@ Also supports a generic site changing detection for simpler county sites and oth
 
 # Supported Sites:
 - RiteAId - for state-wide search check https://www.vaxxmax.com/ (more hit-or-miss than this method, but covers entire state availability)
+- Giant (use multiple zipcodes to check specific Giants, seems very localized in their check) !have not found avail so can't test a true positive!
 - Weis
 - Wegmans
 - Any site changing (using _change.py)
