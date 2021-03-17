@@ -254,7 +254,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                         button2click.click(); #click it again idk it works prob off screen?
                     #END TRY
                     time.sleep(0.5); #give the page a chance to do stuff
-                    if( len(driver.find_elements_by_xpath("//*[contains(text(), 'check again another day')]")) <= 1 ): #Time of Day
+                    if( (len(driver.find_elements_by_xpath("//*[contains(text(), 'check again another day')]")) <= 1) & (len(driver.find_elements_by_xpath("//*[contains(text(), 'Something went wrong. Please')]")) == 0) ): #Time of Day
                         riteaidWords.append(str(i+1)); #record the number that didn't tell you to check agian another day
                         riteaidSet['all reserved'] = False; #all reserved stays true, no appointments
                         driver.save_screenshot('riteaidAvail.png'); #save a pic to check later
@@ -313,7 +313,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
     if( (riteaidSet['all reserved'] == False) ):
         #time to send email if either pass this
         subject = 'Riteaid Site Active'; #subject line
-        message = 'Body: Riteaid at zipcode '+zipper+' has availability at store numbers '+' & '.join(riteaidWords)+'. Site: '+riteaidCheck; #message body
+        message = 'Body: Riteaid at zipcode '+zipper+' has availability at store numbers '+' & '.join(riteaidWords)+'. Site: '+riteaidCheck+' '; #message body
         
         msg = MIMEMultipart(); #start an email message
         msg['From'] = email; #set from
