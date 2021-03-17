@@ -15,7 +15,7 @@ Also supports a generic site changing detection for simpler county sites and oth
 
 Code checks for vaccine availability for supported sites. For all current supported sites it checks using an automated Chrome browser since those sites have chatbots that I could only figure out how to navigate with a real browser.
 
-If there is availability in your state, it will email/text-through-email whatever destinations you set.
+If there is availability in your state, it will email/text-through-email whatever destinations you set. **RiteAid is localized to your zipcode**
 
 There is a time limit (user definable) between alerts, so it doesn't spam you.
 
@@ -31,7 +31,7 @@ I would reccomend that you make a new email to send from if you want to be extra
 
 # Limits:
 **For a specific site:**
-- It will spam you if there are vaccine appointments in a far-off area of your state that are available. Sub-state areas could be added but I don't know what they are so I haven't added support for that. It would be another nested try and WebDriverWait call for the sub-state string if the sub-state strings were known.
+- It will spam you if there are vaccine appointments in a far-off area of your state that are available. **Not applicable for Riteaid** Sub-state areas could be added but I don't know what they are so I haven't added support for that. It would be another nested try and WebDriverWait call for the sub-state string if the sub-state strings were known.
 - The web parsing takes like a minute due to waiting up to 15 sec (user configurable) for each element to load. That limits how often you can check, basically.
 
 **For a change in a site:**
