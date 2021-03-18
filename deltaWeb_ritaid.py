@@ -253,9 +253,19 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                         time.sleep(0.05); #give the page a chance to do stuff
                         button2click.click(); #click it again idk it works prob off screen?
                     #END TRY
-                    time.sleep(0.5); #give the page a chance to do stuff
-                    if( (len(driver.find_elements_by_xpath("//*[contains(text(), 'check again another day')]")) <= 1) & (len(driver.find_elements_by_xpath("//*[contains(text(), 'Something went wrong. Please')]")) == 0) ): #Time of Day
+                     try:
+                        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'check again another day')]"))); #let page load if it's gonna load, or speed along if it's just check again later
+                    except:
+                        pass;
+                    #END TRY
+                    if( (len(driver.find_elements_by_xpath("//*[contains(text(), 'check again another day')]")) < 1) & (len(driver.find_elements_by_xpath("//*[contains(text(), 'Something went wrong. Please')]")) == 0) ): #Time of Day
                         riteaidWords.append(str(i+1)); #record the number that didn't tell you to check agian another day
+                        button2click = driver.find_elements_by_xpath("//*[contains(text(), 'Next')]")[0]; #search for elements with this string
+                        try:
+                            button2click.click(); #click it
+                        except:
+                            pass;
+                        #END TRY
                         riteaidSet['all reserved'] = False; #all reserved stays true, no appointments
                         driver.save_screenshot('riteaidAvail.png'); #save a pic to check later
                         try:
@@ -272,6 +282,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
                         WebDriverWait(driver, driverDelay).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Immunization Scheduler')]")));
                     else:
                         #catch a weird error
+                        time.sleep(0.1); #give the page a chance to do stuff
                         if( len(driver.find_elements_by_xpath("//*[contains(text(), 'Make an Appointment at Rite Aid')]")) > 0 ):
                             try:
                                 driver.execute_script("window.onbeforeunload = function() {};")
@@ -313,7 +324,7 @@ if( (currentTime - lastTime).total_seconds() > 60*resendLimit ):
     if( (riteaidSet['all reserved'] == False) ):
         #time to send email if either pass this
         subject = 'Riteaid Site Active'; #subject line
-        message = 'Body: Riteaid at zipcode '+zipper+' has availability at store numbers '+' & '.join(riteaidWords)+'. Site: '+riteaidCheck+' '; #message body
+        message = 'Riteaid @ zip '+zipper+' avail @ store #s '+' & '.join(riteaidWords)+'. Site: '+riteaidCheck+' '; #message body
         
         msg = MIMEMultipart(); #start an email message
         msg['From'] = email; #set from
