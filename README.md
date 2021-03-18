@@ -16,7 +16,7 @@ Also supports a generic site changing detection for simpler county sites and oth
 
 Code checks for vaccine availability for supported sites. For all current supported sites it checks using an automated Chrome browser since those sites have chatbots that I could only figure out how to navigate with a real browser.
 
-If there is availability in your state, it will email/text-through-email whatever destinations you set. **RiteAid is localized to your zipcode**
+If there is availability in your state, it will email/text-through-email whatever destinations you set. **RiteAid is localized to your zipcode, Giant is very localized use multiple zipcodes per each Giant in your region**
 
 There is a time limit (user definable) between alerts, so it doesn't spam you.
 
